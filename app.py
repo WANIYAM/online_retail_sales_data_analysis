@@ -51,626 +51,82 @@ FEATURE_COLS = ["Recency", "Frequency", "Monetary", "AvgBasket", "Tenure", "Dist
 
 # ----------------------------------------------------------------------------
 # GLOBAL STYLE
-#   Display / Headings : Outfit             (geometric, modern, punchy numerals)
-#   Body / UI text     : Plus Jakarta Sans  (clean, friendly, highly legible)
 # ----------------------------------------------------------------------------
 st.markdown(
     """
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
-    :root {
-        --accent: #6C5CE7;
-        --accent-2: #00CEC9;
-        --accent-3: #FD79A8;
-        --ink: #0f1225;
-        --muted: #6b7280;
-        --subtle: #9ca3af;
-        --border: rgba(20, 20, 45, 0.07);
-        --card-shadow: 0 2px 12px rgba(20, 20, 45, 0.05);
-        --card-shadow-hover: 0 14px 34px rgba(108, 92, 231, 0.15);
+    html, body, [class*="css"]  { font-family: 'Inter', sans-serif; }
 
-        --font-body: 'Plus Jakarta Sans', sans-serif;
-        --font-display: 'Outfit', sans-serif;
-    }
+    footer {visibility: hidden;}
 
-    html, body, [class*="css"] {
-        font-family: var(--font-body);
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-        letter-spacing: -0.005em;
-    }
+    .block-container { padding-top: 1.5rem; padding-bottom: 3rem; max-width: 1300px; }
 
-    footer { visibility: hidden; }
-    #MainMenu { visibility: hidden; }
-
-    /* ============================================================
-       STREAMLIT TOP HEADER BAR
-       ============================================================ */
-    header[data-testid="stHeader"] {
-        background: rgba(250, 250, 253, 0.72) !important;
-        backdrop-filter: blur(14px) saturate(160%);
-        -webkit-backdrop-filter: blur(14px) saturate(160%);
-        border-bottom: 1px solid rgba(20, 20, 45, 0.06);
-        height: 3.1rem;
-        z-index: 999;
-        box-shadow: 0 1px 0 rgba(20, 20, 45, 0.02);
-    }
-    header[data-testid="stHeader"] > div { background: transparent !important; }
-    div[data-testid="stDecoration"] { display: none !important; }
-
-    .stAppDeployButton {
-        border-radius: 10px !important;
-        overflow: hidden;
-        box-shadow: 0 6px 16px rgba(108, 92, 231, 0.28);
-        background: linear-gradient(120deg, #6C5CE7, #00CEC9) !important;
-        transition: transform .18s ease, box-shadow .18s ease;
-    }
-    .stAppDeployButton:hover {
-        transform: translateY(-1px);
-        box-shadow: 0 10px 22px rgba(108, 92, 231, 0.38);
-    }
-    .stAppDeployButton > button,
-    .stAppDeployButton button {
-        background: transparent !important;
-        color: #ffffff !important;
-        font-family: var(--font-body) !important;
-        font-weight: 600 !important;
-        border: none !important;
-    }
-
-    header[data-testid="stHeader"] [data-testid="stToolbar"] button {
-        border-radius: 8px !important;
-        transition: background .15s ease;
-    }
-    header[data-testid="stHeader"] [data-testid="stToolbar"] button:hover {
-        background: rgba(108, 92, 231, 0.10) !important;
-    }
-    header[data-testid="stHeader"] [data-testid="stToolbar"] svg {
-        color: var(--ink) !important;
-        fill: var(--ink) !important;
-    }
-
-    .block-container { padding-top: 1.2rem; padding-bottom: 3rem; max-width: 1300px; }
-
-    .stApp {
-        background:
-            radial-gradient(1200px 600px at 100% -10%, rgba(108,92,231,0.07), transparent 60%),
-            radial-gradient(900px 500px at -10% 10%, rgba(0,206,201,0.06), transparent 60%),
-            #fafafd;
-    }
-
-    /* -------------------- Hero banner -------------------- */
+    /* Hero banner */
     .hero {
-        position: relative;
-        overflow: hidden;
-        background: linear-gradient(120deg, #6C5CE7 0%, #8A7BF0 42%, #00CEC9 100%);
-        border-radius: 22px;
-        padding: 34px 38px;
-        margin-bottom: 26px;
+        background: linear-gradient(120deg, #6C5CE7 0%, #00CEC9 100%);
+        border-radius: 18px;
+        padding: 28px 32px;
+        margin-bottom: 22px;
         color: white;
-        box-shadow: 0 24px 55px -22px rgba(108, 92, 231, 0.6);
+        box-shadow: 0 10px 30px rgba(108, 92, 231, 0.25);
     }
-    .hero::before {
-        content: "";
-        position: absolute; top: -40%; right: -10%;
-        width: 460px; height: 460px;
-        background: radial-gradient(circle, rgba(255,255,255,0.30), transparent 65%);
-        border-radius: 50%;
-        pointer-events: none;
-    }
-    .hero::after {
-        content: "";
-        position: absolute; left: -60px; bottom: -140px;
-        width: 340px; height: 340px;
-        background: radial-gradient(circle, rgba(0,0,0,0.20), transparent 65%);
-        border-radius: 50%;
-        pointer-events: none;
-    }
-    .hero h1 {
-        font-family: var(--font-display);
-        font-size: 2.05rem; font-weight: 800; letter-spacing: -0.025em;
-        margin: 0 0 6px 0; position: relative; z-index: 1;
-        color: #ffffff;
-    }
-    .hero p {
-        font-family: var(--font-body);
-        font-size: 0.98rem; opacity: 0.94; margin: 0;
-        max-width: 780px; line-height: 1.6;
-        position: relative; z-index: 1;
-        color: #ffffff;
-    }
+    .hero h1 { font-size: 1.9rem; font-weight: 800; margin: 0 0 4px 0; }
+    .hero p { font-size: 0.95rem; opacity: 0.92; margin: 0; }
     .hero .chip {
-        display: inline-block;
-        font-family: var(--font-body);
-        background: rgba(255,255,255,0.18);
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px);
-        border: 1px solid rgba(255,255,255,0.28);
-        padding: 5px 14px; border-radius: 999px;
-        font-size: 0.78rem; font-weight: 600;
-        margin-top: 14px; margin-right: 8px;
-        position: relative; z-index: 1;
-        color: #ffffff;
+        display: inline-block; background: rgba(255,255,255,0.18);
+        padding: 4px 12px; border-radius: 999px; font-size: 0.78rem;
+        margin-top: 10px; margin-right: 8px; font-weight: 500;
     }
 
-    /* -------------------- KPI cards -------------------- */
+    /* KPI cards */
     .kpi-card {
-        position: relative;
-        background: #ffffff;
-        border-radius: 16px;
-        padding: 20px 22px 18px 22px;
-        box-shadow: var(--card-shadow);
-        border: 1px solid var(--border);
+        background: white; border-radius: 14px; padding: 18px 20px;
+        box-shadow: 0 2px 14px rgba(30, 30, 60, 0.06);
+        border: 1px solid rgba(0,0,0,0.04);
         height: 100%;
-        transition: transform .2s ease, box-shadow .2s ease;
     }
-    .kpi-card:hover {
-        transform: translateY(-2px);
-        box-shadow: var(--card-shadow-hover);
-    }
-    .kpi-icon { font-size: 1.35rem; margin-bottom: 8px; }
-    .kpi-label {
-        font-family: var(--font-body);
-        font-size: 0.74rem; color: var(--muted); font-weight: 700;
-        text-transform: uppercase; letter-spacing: 0.07em;
-    }
-    .kpi-value {
-        font-family: var(--font-display);
-        font-size: 1.85rem; font-weight: 800; color: var(--ink);
-        margin-top: 4px; letter-spacing: -0.03em; line-height: 1.1;
-        font-variant-numeric: tabular-nums;
-    }
-    .kpi-sub {
-        font-family: var(--font-body);
-        font-size: 0.75rem; color: var(--subtle); margin-top: 6px; line-height: 1.45;
-    }
+    .kpi-icon { font-size: 1.4rem; margin-bottom: 6px; }
+    .kpi-label { font-size: 0.80rem; color: #6b7280; font-weight: 600; text-transform: uppercase; letter-spacing: 0.03em; }
+    .kpi-value { font-size: 1.65rem; font-weight: 800; color: #1a1a2e; margin-top: 2px; }
+    .kpi-sub { font-size: 0.78rem; color: #9ca3af; margin-top: 4px; }
 
-    /* -------------------- Section headers -------------------- */
-    .section-title {
-        font-family: var(--font-display);
-        font-size: 1.2rem; font-weight: 700; color: var(--ink);
-        margin: 6px 0 6px 0; letter-spacing: -0.02em;
-        display: flex; align-items: center; gap: 10px;
-    }
-    .section-title::before {
-        content: "";
-        display: inline-block;
-        width: 4px; height: 18px;
-        background: linear-gradient(180deg, var(--accent), var(--accent-2));
-        border-radius: 4px;
-    }
-    .section-sub {
-        font-family: var(--font-body);
-        font-size: 0.85rem; color: var(--muted);
-        margin: 0 0 16px 14px; line-height: 1.6;
-    }
+    /* Section headers */
+    .section-title { font-size: 1.15rem; font-weight: 700; color: #1a1a2e; margin: 6px 0 12px 0; }
+    .section-sub { font-size: 0.85rem; color: #6b7280; margin-top: -8px; margin-bottom: 14px; }
 
-    /* -------------------- Status badges -------------------- */
-    .badge {
-        font-family: var(--font-body);
-        display: inline-block; padding: 4px 12px; border-radius: 999px;
-        font-size: 0.74rem; font-weight: 700; letter-spacing: 0.01em;
-    }
-    .badge-high   { background: #FEE7E4; color: #C0392B; }
-    .badge-medium { background: #FEF3D6; color: #B7791F; }
-    .badge-low    { background: #DDF7E3; color: #1E8449; }
+    /* Segment / status badges */
+    .badge { display:inline-block; padding: 3px 10px; border-radius: 999px; font-size: 0.75rem; font-weight: 700; }
+    .badge-high { background:#FDE2E1; color:#C0392B; }
+    .badge-medium { background:#FEF3D6; color:#B7791F; }
+    .badge-low { background:#DDF7E3; color:#1E8449; }
 
-    /* -------------------- Model registry cards -------------------- */
+    /* Model registry cards */
     .model-card {
-        position: relative;
-        background: #ffffff;
-        border-radius: 16px;
-        padding: 20px 22px;
-        box-shadow: var(--card-shadow);
-        border: 1px solid var(--border);
-        margin-bottom: 14px;
-        transition: transform .2s ease, box-shadow .2s ease;
-        overflow: hidden;
+        background: white; border-radius: 14px; padding: 18px 20px;
+        box-shadow: 0 2px 14px rgba(30, 30, 60, 0.06);
+        border: 1px solid rgba(0,0,0,0.04); margin-bottom: 14px;
     }
-    .model-card::before {
-        content: "";
-        position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
-        background: linear-gradient(180deg, var(--accent), var(--accent-2));
-    }
-    .model-card:hover {
-        transform: translateY(-2px);
-        box-shadow: var(--card-shadow-hover);
-    }
-    .model-name {
-        font-family: var(--font-display);
-        font-size: 1.1rem; font-weight: 700; color: var(--ink);
-        letter-spacing: -0.02em;
-    }
-    .model-type {
-        font-family: var(--font-body);
-        display: inline-block; margin-left: 10px;
-        padding: 3px 11px; border-radius: 999px;
-        font-size: 0.70rem; font-weight: 700;
-        background: #EDE9FE; color: #5B21B6;
-        vertical-align: middle;
-    }
-    .model-desc {
-        font-family: var(--font-body);
-        font-size: 0.86rem; color: var(--muted);
-        margin: 10px 0 12px 0; line-height: 1.65;
-    }
-    .model-metric {
-        font-family: var(--font-body);
-        display: inline-block; background: #f6f6fb;
-        border: 1px solid var(--border);
-        border-radius: 10px; padding: 6px 12px;
-        margin-right: 8px; margin-bottom: 6px;
-        font-size: 0.82rem; color: var(--muted);
-    }
-    .model-metric b {
-        font-family: var(--font-display);
-        color: var(--ink); font-weight: 700; letter-spacing: -0.01em;
-    }
+    .model-name { font-size: 1.02rem; font-weight: 800; color: #1a1a2e; }
+    .model-type { display:inline-block; margin-left: 8px; padding: 2px 10px; border-radius: 999px;
+        font-size: 0.72rem; font-weight: 700; background: #EDE9FE; color: #5B21B6; }
+    .model-desc { font-size: 0.85rem; color: #6b7280; margin: 6px 0 10px 0; }
+    .model-metric { display:inline-block; background:#F5F5FA; border-radius: 10px; padding: 6px 12px; margin-right: 8px; margin-bottom: 6px; }
+    .model-metric b { color: #1a1a2e; }
 
-    /* -------------------- Tabs -------------------- */
-    .stTabs [data-baseweb="tab-list"] {
-        gap: 6px; background: transparent;
-        border-bottom: 1px solid var(--border);
-        padding-bottom: 0;
-    }
+    div[data-testid="stMetricValue"] { font-weight: 700; }
+
+    .stTabs [data-baseweb="tab-list"] { gap: 4px; }
     .stTabs [data-baseweb="tab"] {
-        font-family: var(--font-body);
-        border-radius: 12px 12px 0 0;
-        padding: 10px 20px;
-        font-weight: 600;
-        color: var(--muted);
-        transition: all .15s ease;
+        border-radius: 10px 10px 0 0; padding: 8px 18px; font-weight: 600;
     }
-    .stTabs [data-baseweb="tab"]:hover {
-        color: var(--accent);
-        background: rgba(108,92,231,0.05);
-    }
-    .stTabs [aria-selected="true"] {
-        color: var(--accent) !important;
-        background: rgba(108,92,231,0.08);
-    }
-    .stTabs [data-baseweb="tab-highlight"] { background-color: var(--accent); }
 
-    /* ============================================================
-       SIDEBAR — vibrant, colorful premium panel (fixed visibility)
-       ============================================================ */
     section[data-testid="stSidebar"] {
-        background:
-            radial-gradient(700px 500px at 0% 0%, rgba(108,92,231,0.45), transparent 55%),
-            radial-gradient(600px 500px at 100% 30%, rgba(253,121,168,0.28), transparent 55%),
-            radial-gradient(700px 550px at 100% 100%, rgba(0,206,201,0.32), transparent 60%),
-            radial-gradient(500px 400px at 0% 85%, rgba(253,203,110,0.18), transparent 60%),
-            linear-gradient(180deg, #1a1035 0%, #0d0d1f 55%, #0a0a17 100%) !important;
-        border-right: 1px solid rgba(255,255,255,0.08);
-        font-family: var(--font-body);
-        box-shadow: inset -1px 0 0 rgba(255,255,255,0.04), 6px 0 30px rgba(0,0,0,0.15);
-        color: #e5e5f0;
+        background: #12121f;
     }
-    /* Keep inner content transparent so the gradient shows through */
-    section[data-testid="stSidebar"] > div,
-    section[data-testid="stSidebar"] [data-testid="stSidebarContent"] {
-        background: transparent !important;
-    }
-
-    /* Scoped light text — ONLY for these elements, so alerts stay readable */
-    section[data-testid="stSidebar"] h1,
-    section[data-testid="stSidebar"] h2,
-    section[data-testid="stSidebar"] h3,
-    section[data-testid="stSidebar"] h4,
-    section[data-testid="stSidebar"] p,
-    section[data-testid="stSidebar"] small,
-    section[data-testid="stSidebar"] label,
-    section[data-testid="stSidebar"] .stMarkdown,
-    section[data-testid="stSidebar"] [data-testid="stWidgetLabel"],
-    section[data-testid="stSidebar"] [data-testid="stWidgetLabel"] * {
-        color: #e5e5f0 !important;
-    }
-
-    /* --- Alerts (error / warning / info / success) — restore DARK text --- */
-    section[data-testid="stSidebar"] [data-testid="stAlert"],
-    section[data-testid="stSidebar"] [data-testid="stAlert"] *,
-    section[data-testid="stSidebar"] [data-testid="stAlert"] p,
-    section[data-testid="stSidebar"] [data-testid="stAlert"] span,
-    section[data-testid="stSidebar"] [data-testid="stAlert"] div,
-    section[data-testid="stSidebar"] [data-testid="stAlert"] svg {
-        color: #1a1a2e !important;
-        fill: #1a1a2e !important;
-    }
-    section[data-testid="stSidebar"] [data-testid="stAlert"] {
-        border-radius: 10px !important;
-    }
-
-    /* Sidebar dividers — colorful gradient */
-    section[data-testid="stSidebar"] hr {
-        border: none !important;
-        height: 1.5px !important;
-        background: linear-gradient(90deg,
-            transparent 0%,
-            rgba(108,92,231,0.7) 25%,
-            rgba(253,121,168,0.7) 50%,
-            rgba(0,206,201,0.7) 75%,
-            transparent 100%) !important;
-        margin: 16px 0 !important;
-        border-radius: 2px;
-    }
-
-    /* Sidebar captions — dimmer, but still readable */
-    section[data-testid="stSidebar"] [data-testid="stCaptionContainer"],
-    section[data-testid="stSidebar"] .stCaption,
-    section[data-testid="stSidebar"] [data-testid="stCaptionContainer"] * {
-        color: rgba(229,229,240,0.62) !important;
-    }
-
-    /* Bold labels (**Filters**) — SOLID bright color (no gradient text trick) */
-    section[data-testid="stSidebar"] p > strong {
-        display: inline-block;
-        color: #C4B5FD !important;
-        font-size: 0.7rem !important;
-        font-weight: 800 !important;
-        letter-spacing: 0.14em;
-        text-transform: uppercase;
-        margin-bottom: 6px;
-    }
-
-    /* --- Radio navigation: colorful pill rows --- */
-    section[data-testid="stSidebar"] .stRadio > label { display: none !important; }
-    section[data-testid="stSidebar"] .stRadio > div[role="radiogroup"] {
-        display: flex; flex-direction: column; gap: 5px;
-    }
-    section[data-testid="stSidebar"] .stRadio > div[role="radiogroup"] label {
-        position: relative;
-        display: flex; align-items: center;
-        padding: 10px 12px !important;
-        border-radius: 11px !important;
-        border: 1px solid transparent;
-        margin: 0 !important;
-        cursor: pointer;
-        overflow: hidden;
-        transition: all .18s ease;
-    }
-    section[data-testid="stSidebar"] .stRadio > div[role="radiogroup"] label::before {
-        content: "";
-        position: absolute; left: 0; top: 12%; bottom: 12%;
-        width: 3px; border-radius: 3px;
-        background: var(--rail, #6C5CE7);
-        opacity: 0.55;
-        transition: opacity .18s ease, top .18s ease, bottom .18s ease;
-    }
-    section[data-testid="stSidebar"] .stRadio > div[role="radiogroup"] label:nth-child(1)::before { --rail: #6C5CE7; }
-    section[data-testid="stSidebar"] .stRadio > div[role="radiogroup"] label:nth-child(2)::before { --rail: #FD79A8; }
-    section[data-testid="stSidebar"] .stRadio > div[role="radiogroup"] label:nth-child(3)::before { --rail: #00CEC9; }
-    section[data-testid="stSidebar"] .stRadio > div[role="radiogroup"] label:nth-child(4)::before { --rail: #FDCB6E; }
-    section[data-testid="stSidebar"] .stRadio > div[role="radiogroup"] label:nth-child(5)::before { --rail: #E17055; }
-    section[data-testid="stSidebar"] .stRadio > div[role="radiogroup"] label:nth-child(6)::before { --rail: #0984E3; }
-    section[data-testid="stSidebar"] .stRadio > div[role="radiogroup"] label:nth-child(7)::before { --rail: #00B894; }
-
-    section[data-testid="stSidebar"] .stRadio > div[role="radiogroup"] label:hover {
-        background: rgba(255,255,255,0.06) !important;
-        border-color: rgba(255,255,255,0.08) !important;
-        transform: translateX(2px);
-    }
-    section[data-testid="stSidebar"] .stRadio > div[role="radiogroup"] label:hover::before {
-        opacity: 1;
-    }
-    section[data-testid="stSidebar"] .stRadio > div[role="radiogroup"] label > div:first-child {
-        display: none !important;
-    }
-    section[data-testid="stSidebar"] .stRadio > div[role="radiogroup"] label span {
-        font-size: 0.92rem !important;
-        font-weight: 500;
-        color: rgba(229,229,240,0.88) !important;
-        transition: color .15s ease, font-weight .15s ease;
-    }
-    section[data-testid="stSidebar"] .stRadio > div[role="radiogroup"] label:has(input:checked) {
-        background: linear-gradient(120deg,
-            rgba(108,92,231,0.55) 0%,
-            rgba(253,121,168,0.40) 50%,
-            rgba(0,206,201,0.45) 100%) !important;
-        border-color: rgba(167,139,250,0.55) !important;
-        box-shadow: 0 10px 24px rgba(108,92,231,0.40), inset 0 1px 0 rgba(255,255,255,0.15);
-        transform: translateX(3px);
-    }
-    section[data-testid="stSidebar"] .stRadio > div[role="radiogroup"] label:has(input:checked)::before {
-        opacity: 1;
-        top: 8%; bottom: 8%;
-        width: 4px;
-        background: #ffffff;
-        box-shadow: 0 0 12px rgba(255,255,255,0.75);
-    }
-    section[data-testid="stSidebar"] .stRadio > div[role="radiogroup"] label:has(input:checked) span {
-        color: #ffffff !important;
-        font-weight: 700 !important;
-    }
-
-    /* --- File uploader --- */
-    section[data-testid="stSidebar"] [data-testid="stFileUploader"] {
-        background: linear-gradient(135deg, rgba(108,92,231,0.14), rgba(253,121,168,0.10));
-        border: 1.5px dashed rgba(167,139,250,0.45);
-        border-radius: 12px;
-        padding: 8px;
-        transition: border-color .18s ease, background .18s ease;
-    }
-    section[data-testid="stSidebar"] [data-testid="stFileUploader"]:hover {
-        border-color: rgba(253,121,168,0.75);
-        background: linear-gradient(135deg, rgba(108,92,231,0.20), rgba(253,121,168,0.15));
-    }
-    section[data-testid="stSidebar"] [data-testid="stFileUploader"] section {
-        background: transparent !important;
-        border: none !important;
-        padding: 6px !important;
-    }
-    /* Uploader inner text — force visible light color */
-    section[data-testid="stSidebar"] [data-testid="stFileUploader"] small,
-    section[data-testid="stSidebar"] [data-testid="stFileUploader"] span,
-    section[data-testid="stSidebar"] [data-testid="stFileUploader"] p,
-    section[data-testid="stSidebar"] [data-testid="stFileUploader"] div,
-    section[data-testid="stSidebar"] [data-testid="stFileUploader"] label {
-        color: #e5e5f0 !important;
-    }
-    section[data-testid="stSidebar"] [data-testid="stFileUploader"] button {
-        background: linear-gradient(120deg, #6C5CE7, #FD79A8) !important;
-        border: none !important;
-        color: #ffffff !important;
-        border-radius: 8px !important;
-        font-weight: 700 !important;
-        transition: all .18s ease;
-        box-shadow: 0 4px 14px rgba(253,121,168,0.35);
-    }
-    section[data-testid="stSidebar"] [data-testid="stFileUploader"] button *,
-    section[data-testid="stSidebar"] [data-testid="stFileUploader"] button span {
-        color: #ffffff !important;
-    }
-    section[data-testid="stSidebar"] [data-testid="stFileUploader"] button:hover {
-        box-shadow: 0 8px 22px rgba(253,121,168,0.55);
-        transform: translateY(-1px);
-    }
-
-    /* --- Inputs, selects, dates — visible light text --- */
-    section[data-testid="stSidebar"] [data-baseweb="select"] > div,
-    section[data-testid="stSidebar"] [data-baseweb="input"] > div,
-    section[data-testid="stSidebar"] input {
-        background: rgba(108,92,231,0.15) !important;
-        border: 1px solid rgba(167,139,250,0.35) !important;
-        border-radius: 10px !important;
-        color: #ffffff !important;
-        transition: border-color .18s ease, box-shadow .18s ease, background .18s ease;
-    }
-    section[data-testid="stSidebar"] [data-baseweb="select"] > div *,
-    section[data-testid="stSidebar"] [data-baseweb="input"] > div *,
-    section[data-testid="stSidebar"] input {
-        color: #ffffff !important;
-    }
-    section[data-testid="stSidebar"] input::placeholder {
-        color: rgba(229,229,240,0.55) !important;
-    }
-    section[data-testid="stSidebar"] [data-baseweb="select"] > div:hover,
-    section[data-testid="stSidebar"] [data-baseweb="input"] > div:hover,
-    section[data-testid="stSidebar"] input:hover {
-        background: rgba(108,92,231,0.22) !important;
-        border-color: rgba(167,139,250,0.60) !important;
-    }
-    section[data-testid="stSidebar"] [data-baseweb="select"]:focus-within > div,
-    section[data-testid="stSidebar"] [data-baseweb="input"]:focus-within > div,
-    section[data-testid="stSidebar"] input:focus {
-        border-color: #FD79A8 !important;
-        box-shadow: 0 0 0 3px rgba(253,121,168,0.28) !important;
-        background: rgba(108,92,231,0.25) !important;
-    }
-
-    /* Multiselect tags */
-    section[data-testid="stSidebar"] [data-baseweb="tag"] {
-        background: linear-gradient(120deg, #6C5CE7, #FD79A8) !important;
-        border-radius: 8px !important;
-        box-shadow: 0 3px 10px rgba(108,92,231,0.35);
-    }
-    section[data-testid="stSidebar"] [data-baseweb="tag"],
-    section[data-testid="stSidebar"] [data-baseweb="tag"] *,
-    section[data-testid="stSidebar"] [data-baseweb="tag"] span {
-        color: #ffffff !important;
-    }
-
-    /* --- Sidebar buttons (Retrain) --- */
-    section[data-testid="stSidebar"] .stButton > button {
-        background: linear-gradient(120deg,
-            rgba(108,92,231,0.45) 0%,
-            rgba(253,121,168,0.40) 50%,
-            rgba(0,206,201,0.45) 100%) !important;
-        border: 1px solid rgba(167,139,250,0.55) !important;
-        border-radius: 12px !important;
-        font-weight: 700 !important;
-        transition: all .2s ease;
-        box-shadow: 0 6px 18px rgba(108,92,231,0.25);
-    }
-    section[data-testid="stSidebar"] .stButton > button,
-    section[data-testid="stSidebar"] .stButton > button *,
-    section[data-testid="stSidebar"] .stButton > button span {
-        color: #ffffff !important;
-    }
-    section[data-testid="stSidebar"] .stButton > button:hover {
-        background: linear-gradient(120deg, #6C5CE7, #FD79A8, #00CEC9) !important;
-        border-color: transparent !important;
-        transform: translateY(-2px);
-        box-shadow: 0 14px 30px rgba(253,121,168,0.45);
-    }
-    section[data-testid="stSidebar"] .stButton > button:hover,
-    section[data-testid="stSidebar"] .stButton > button:hover * {
-        color: #ffffff !important;
-    }
-
-    /* ----------------------------------------------------------------
-       Baseweb popovers / dropdown menus render in a portal OUTSIDE the
-       sidebar. Give them a consistent dark theme so text is readable.
-       ---------------------------------------------------------------- */
-    div[data-baseweb="popover"] [role="listbox"],
-    div[data-baseweb="popover"] [data-baseweb="menu"],
-    div[data-baseweb="popover"] ul {
-        background: #1a1035 !important;
-        border: 1px solid rgba(167,139,250,0.35) !important;
-        border-radius: 12px !important;
-        box-shadow: 0 20px 50px rgba(0,0,0,0.45) !important;
-    }
-    div[data-baseweb="popover"] [role="option"],
-    div[data-baseweb="popover"] li,
-    div[data-baseweb="popover"] [role="option"] span,
-    div[data-baseweb="popover"] li span {
-        color: #e5e5f0 !important;
-    }
-    div[data-baseweb="popover"] [role="option"]:hover,
-    div[data-baseweb="popover"] li:hover,
-    div[data-baseweb="popover"] [aria-selected="true"] {
-        background: linear-gradient(120deg, rgba(108,92,231,0.5), rgba(253,121,168,0.35)) !important;
-        color: #ffffff !important;
-    }
-
-    /* -------------------- Main-area buttons -------------------- */
-    .stButton > button, .stDownloadButton > button {
-        font-family: var(--font-body);
-        border-radius: 12px;
-        font-weight: 600;
-        letter-spacing: -0.005em;
-        transition: all .18s ease;
-    }
-    .stButton > button { border: 1px solid var(--border); }
-    .stButton > button:hover {
-        transform: translateY(-1px);
-        box-shadow: 0 10px 22px rgba(108,92,231,0.18);
-        border-color: rgba(108,92,231,0.35);
-        color: var(--accent);
-    }
-    .stDownloadButton > button {
-        background: linear-gradient(120deg, #6C5CE7, #00CEC9);
-        color: #ffffff !important;
-        border: none;
-    }
-    .stDownloadButton > button:hover {
-        transform: translateY(-1px);
-        box-shadow: 0 14px 30px rgba(108,92,231,0.35);
-    }
-
-    /* -------------------- Dataframes & expanders -------------------- */
-    div[data-testid="stDataFrame"] {
-        border-radius: 14px;
-        border: 1px solid var(--border);
-        overflow: hidden;
-        box-shadow: var(--card-shadow);
-        font-family: var(--font-body);
-    }
-    details[data-testid="stExpander"] {
-        border-radius: 14px;
-        border: 1px solid var(--border);
-        background: #ffffff;
-        box-shadow: var(--card-shadow);
-        overflow: hidden;
-        font-family: var(--font-body);
-    }
-    details[data-testid="stExpander"] summary { font-weight: 600; }
-
-    /* Native metric value */
-    div[data-testid="stMetricValue"] {
-        font-family: var(--font-display);
-        font-weight: 700;
-    }
+    section[data-testid="stSidebar"] * { color: #e5e5f0 !important; }
+    section[data-testid="stSidebar"] .stRadio label span { font-size: 0.92rem; }
     </style>
     """,
     unsafe_allow_html=True,
@@ -678,12 +134,10 @@ st.markdown(
 
 PLOTLY_LAYOUT = dict(
     template="plotly_white",
-    font=dict(family="Plus Jakarta Sans, Outfit, sans-serif", size=13, color="#1a1a2e"),
+    font=dict(family="Inter, sans-serif", size=13, color="#1a1a2e"),
     margin=dict(l=10, r=10, t=40, b=10),
     colorway=PALETTE,
     legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1),
-    paper_bgcolor="rgba(0,0,0,0)",
-    plot_bgcolor="rgba(0,0,0,0)",
 )
 
 
@@ -710,7 +164,7 @@ def kpi_card(col, label, value, icon, sub=None, color=ACCENT):
     with col:
         st.markdown(
             f"""
-            <div class="kpi-card" style="border-left:4px solid {color};">
+            <div class="kpi-card" style="border-top:4px solid {color};">
                 <div class="kpi-icon">{icon}</div>
                 <div class="kpi-label">{label}</div>
                 <div class="kpi-value">{value}</div>
@@ -768,7 +222,7 @@ def load_data(source) -> pd.DataFrame:
 
 
 # ----------------------------------------------------------------------------
-# ML MODEL 1 & 2 — CHURN CLASSIFIER + CLV REGRESSOR
+# ML MODEL 1 & 2 — CHURN CLASSIFIER (Random Forest) + CLV REGRESSOR (Gradient Boosting)
 # ----------------------------------------------------------------------------
 def compute_customer_features(df: pd.DataFrame, as_of_date: pd.Timestamp) -> pd.DataFrame:
     """Recency / Frequency / Monetary + engineered features, computed only from
@@ -810,6 +264,7 @@ def train_customer_models(df: pd.DataFrame, holdout_days: int = 90):
     if y_churn.nunique() < 2:
         return {"ok": False, "reason": "Every customer fell into a single churn class in this filter selection — need a more varied sample."}
 
+    # --- Churn classifier: Random Forest, evaluated with a held-out test split ---
     Xtr, Xte, ytr, yte = train_test_split(X, y_churn, test_size=0.25, random_state=42, stratify=y_churn)
     churn_clf = RandomForestClassifier(n_estimators=300, max_depth=8, min_samples_leaf=5, random_state=42, class_weight="balanced")
     churn_clf.fit(Xtr, ytr)
@@ -825,6 +280,7 @@ def train_customer_models(df: pd.DataFrame, holdout_days: int = 90):
     }
     feature_importance = dict(zip(FEATURE_COLS, churn_clf.feature_importances_))
 
+    # --- CLV regressor: Gradient Boosting on log1p(future spend) ---
     Xtr2, Xte2, ytr2, yte2 = train_test_split(X, y_clv_log, test_size=0.25, random_state=42)
     clv_reg = GradientBoostingRegressor(n_estimators=200, max_depth=3, learning_rate=0.05, random_state=42)
     clv_reg.fit(Xtr2, ytr2)
@@ -836,6 +292,7 @@ def train_customer_models(df: pd.DataFrame, holdout_days: int = 90):
         "n_test": len(Xte2),
     }
 
+    # --- Refit both on ALL labeled data, then score every currently active customer ---
     churn_final = RandomForestClassifier(n_estimators=300, max_depth=8, min_samples_leaf=5, random_state=42, class_weight="balanced").fit(X, y_churn)
     clv_final = GradientBoostingRegressor(n_estimators=200, max_depth=3, learning_rate=0.05, random_state=42).fit(X, y_clv_log)
 
@@ -859,7 +316,7 @@ def train_customer_models(df: pd.DataFrame, holdout_days: int = 90):
 
 
 # ----------------------------------------------------------------------------
-# ML MODEL 3 — CUSTOMER SEGMENTATION (K-Means)
+# ML MODEL 3 — CUSTOMER SEGMENTATION (K-Means, unsupervised)
 # ----------------------------------------------------------------------------
 @st.cache_data(show_spinner="Segmenting customers with RFM + K-Means…")
 def compute_rfm_kmeans(df: pd.DataFrame):
@@ -901,7 +358,7 @@ def compute_rfm_kmeans(df: pd.DataFrame):
 
 
 # ----------------------------------------------------------------------------
-# ML MODEL 4 — DEMAND FORECASTING
+# ML MODEL 4 — DEMAND FORECASTING (trend + seasonality linear regression)
 # ----------------------------------------------------------------------------
 @st.cache_data(show_spinner="Fitting demand forecasting model…")
 def compute_forecast(df: pd.DataFrame, n_forecast: int = 3):
@@ -943,6 +400,9 @@ def compute_forecast(df: pd.DataFrame, n_forecast: int = 3):
     Xfut = np.column_stack([future_idx, np.sin(2 * np.pi * fm / 12), np.cos(2 * np.pi * fm / 12)])
     forecast = lr_full.predict(Xfut)
 
+    # Model-learned seasonal effect per calendar month (holding trend fixed at its mean),
+    # expressed as a multiplicative index around 1.0 so it reads like the familiar
+    # "seasonal index" chart, but the numbers come straight out of the fitted regression.
     trend_mean = Xf[:, 0].mean()
     month_effects = {}
     for m in range(1, 13):
@@ -968,7 +428,7 @@ def compute_forecast(df: pd.DataFrame, n_forecast: int = 3):
 
 
 # ----------------------------------------------------------------------------
-# ML MODEL 5 — ASSOCIATION RULE MINING
+# ML MODEL 5 — PRODUCT RECOMMENDATIONS (Apriori-style association rule mining)
 # ----------------------------------------------------------------------------
 @st.cache_data(show_spinner="Mining frequent itemsets & association rules…")
 def compute_association_rules(df: pd.DataFrame, min_support_pct: float = 0.5):
@@ -982,6 +442,8 @@ def compute_association_rules(df: pd.DataFrame, min_support_pct: float = 0.5):
     for prods in invoice_products:
         item_counts.update(prods)
 
+    # Apriori pruning step: drop items that don't meet the minimum support threshold
+    # BEFORE generating candidate pairs — this is what keeps the search tractable.
     min_support_count = max(5, int((min_support_pct / 100) * n_invoices))
     frequent_items = {p for p, c in item_counts.items() if c >= min_support_count}
 
@@ -1008,7 +470,7 @@ def compute_association_rules(df: pd.DataFrame, min_support_pct: float = 0.5):
 
 
 # ----------------------------------------------------------------------------
-# ML MODEL 6 — DECLINE / ANOMALY DETECTION (Isolation Forest)
+# ML MODEL 6 — DECLINE / ANOMALY DETECTION (Isolation Forest, unsupervised)
 # ----------------------------------------------------------------------------
 @st.cache_data(show_spinner="Engineering product trend features…")
 def compute_product_trend_features(df: pd.DataFrame, min_invoices: int = 15) -> pd.DataFrame:
@@ -1063,9 +525,8 @@ def run_isolation_forest(feat_df: pd.DataFrame, contamination: float = 0.1) -> p
 with st.sidebar:
     st.markdown(
         "<div style='display:flex;align-items:center;gap:10px;margin-bottom:6px;'>"
-        "<span style='font-size:1.6rem;filter:drop-shadow(0 2px 6px rgba(253,121,168,0.5));'>🛍️</span>"
-        "<span style='font-size:1.25rem;font-weight:800;font-family:Outfit,sans-serif;"
-        "letter-spacing:-0.02em;color:#C4B5FD;'>RetailIQ ML</span></div>",
+        "<span style='font-size:1.6rem;'>🛍️</span>"
+        "<span style='font-size:1.25rem;font-weight:800;'>RetailIQ ML</span></div>",
         unsafe_allow_html=True,
     )
     st.caption("Online Retail Intelligence — Machine Learning Edition")
@@ -1209,7 +670,7 @@ if page == "📊 Overview":
     st.plotly_chart(fig, width='stretch')
 
 # ============================================================================
-# PAGE: CUSTOMER INTELLIGENCE
+# PAGE: CUSTOMER INTELLIGENCE (Segmentation + Churn + CLV + Action Engine)
 # ============================================================================
 elif page == "🧭 Customer Intelligence":
     rfm, silhouette = compute_rfm_kmeans(dff)
@@ -1219,6 +680,7 @@ elif page == "🧭 Customer Intelligence":
         ["🧭 Segments (K-Means)", "⚠️ Churn Risk (Random Forest)", "💎 CLV Forecast (Gradient Boosting)", "🎯 Action Engine"]
     )
 
+    # --- Segments ---
     with tab_seg:
         section_title("RFM Customer Segmentation", "Customers clustered on Recency, Frequency & Monetary value using K-Means (k=4, unsupervised).")
         seg_counts = rfm["Segment_Label"].value_counts()
@@ -1250,6 +712,7 @@ elif page == "🧭 Customer Intelligence":
             fig.update_layout(**PLOTLY_LAYOUT, height=360)
             st.plotly_chart(fig, width='stretch')
 
+    # --- Churn ---
     with tab_churn:
         if not models["ok"]:
             st.info(models["reason"])
@@ -1278,6 +741,7 @@ elif page == "🧭 Customer Intelligence":
                 fig.update_layout(**PLOTLY_LAYOUT, height=320, xaxis_title="Predicted churn probability", yaxis_title="Customers")
                 st.plotly_chart(fig, width='stretch')
 
+    # --- CLV ---
     with tab_clv:
         if not models["ok"]:
             st.info(models["reason"])
@@ -1298,6 +762,7 @@ elif page == "🧭 Customer Intelligence":
             fig.update_layout(**PLOTLY_LAYOUT, height=460, yaxis=dict(type="category"))
             st.plotly_chart(fig, width='stretch')
 
+    # --- Action Engine ---
     with tab_action:
         if not models["ok"]:
             st.info(models["reason"])
@@ -1405,7 +870,7 @@ elif page == "📈 Demand Forecasting":
             st.dataframe(fc["monthly_rev"].rename("Revenue (£)").to_frame().reset_index().rename(columns={"MonthYear": "Month"}), width='stretch', hide_index=True)
 
 # ============================================================================
-# PAGE: PRODUCT RECOMMENDATIONS
+# PAGE: PRODUCT RECOMMENDATIONS (Association Rule Mining)
 # ============================================================================
 elif page == "🔗 Product Recommendations":
     section_title("\"Customers Also Bought\" — Apriori Association Rule Mining", "Frequent itemset mining over shopping baskets, scored with support, confidence, and lift (the standard association-rule metrics).")
@@ -1460,7 +925,7 @@ elif page == "🔗 Product Recommendations":
                             file_name="association_rules.csv", mime="text/csv")
 
 # ============================================================================
-# PAGE: ANOMALY & DECLINE DETECTION
+# PAGE: ANOMALY & DECLINE DETECTION (Isolation Forest)
 # ============================================================================
 elif page == "📉 Anomaly & Decline Detection":
     section_title("Decline Detector — Isolation Forest", "Unsupervised anomaly detection over each product's sales-trend fingerprint (slope, volatility, % change, recent volume). Products flagged as statistical outliers with a negative trend are surfaced as at-risk.")
