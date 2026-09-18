@@ -3,3 +3,14 @@ venv/
 __pycache__/
 *.pyc
 .env
+
+# Datasets & binary artifacts
+online_retail_II.csv
+*.csv
+data/
+.DS_Store
+*.joblib
+
+# Track sample dataset
+!data/
+!data/sample_online_retail_II.csv

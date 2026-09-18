@@ -35,11 +35,16 @@ currently active customer to drive the **Action Engine**, which ranks outreach b
 
 ## Setup
 
-```bash
-python -m venv venv
-source venv/bin/activate        # Windows: venv\Scripts\activate
-pip install -r requirements.txt
-```
+1. **Clone the repository and install dependencies**:
+   ```bash
+   python -m venv venv
+   source venv/bin/activate        # Windows: venv\Scripts\activate
+   pip install -r requirements.txt
+   ```
+
+2. **Download Dataset**:
+   Download the full *Online Retail II* dataset (`online_retail_II.csv`) from the [UCI Machine Learning Repository](https://archive.ics.uci.edu/dataset/502/online+retail+ii) and place the `online_retail_II.csv` file directly in the project root directory.
+   *(Note: A 50,000-row sample dataset is included at `data/sample_online_retail_II.csv` for lightweight testing, or you can upload custom transaction CSVs directly via the sidebar).*
 
 ## Run
 
@@ -47,7 +52,7 @@ pip install -r requirements.txt
 streamlit run app.py
 ```
 
-The app looks for `online_retail_II.csv` in the same folder by default (already included).
+The app looks for `online_retail_II.csv` in the project root folder by default.
 You can also upload a different CSV from the sidebar at any time — it must contain these
 columns: `Invoice, StockCode, Description, Quantity, InvoiceDate, Price, Customer ID, Country`.
 
